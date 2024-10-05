@@ -1,0 +1,5 @@
+here is a method how you run this code,
+open vscode and python file ,
+type," python text_to_pdf.py bill.txt bill.pdf" ane enter
+here you'll replace bill.txt by the text file yiu want to convert 
+and bill.pdf is the pdf you want
