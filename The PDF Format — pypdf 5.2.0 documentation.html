@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html -->
+<html class="writer-html5" lang="en" data-content_root="../"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="readthedocs-addons-api-version" content="1"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The PDF Format — pypdf 5.2.0 documentation</title>
+      <style type="text/css">:root, :host {
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+  --fa-font-light: normal 300 1em/1 "Font Awesome 6 Pro";
+  --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Pro";
+  --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-regular: normal 400 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-light: normal 300 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-duotone-thin: normal 100 1em/1 "Font Awesome 6 Duotone";
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 6 Sharp";
+  --fa-font-sharp-duotone-solid: normal 900 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-regular: normal 400 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-light: normal 300 1em/1 "Font Awesome 6 Sharp Duotone";
+  --fa-font-sharp-duotone-thin: normal 100 1em/1 "Font Awesome 6 Sharp Duotone";
+}
+
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+  overflow: visible;
+  box-sizing: content-box;
+}
+
+.svg-inline--fa {
+  display: var(--fa-display, inline-block);
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-2xs {
+  vertical-align: 0.1em;
+}
+.svg-inline--fa.fa-xs {
+  vertical-align: 0em;
+}
+.svg-inline--fa.fa-sm {
+  vertical-align: -0.0714285705em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.2em;
+}
+.svg-inline--fa.fa-xl {
+  vertical-align: -0.25em;
+}
+.svg-inline--fa.fa-2xl {
+  vertical-align: -0.3125em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: var(--fa-pull-margin, 0.3em);
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: var(--fa-pull-margin, 0.3em);
+  width: auto;
+}
+.svg-inline--fa.fa-li {
+  width: var(--fa-li-width, 2em);
+  top: 0.25em;
+}
+.svg-inline--fa.fa-fw {
+  width: var(--fa-fw-width, 1.25em);
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers-counter, .fa-layers-text {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  transform-origin: center center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: var(--fa-counter-background-color, #ff253a);
+  border-radius: var(--fa-counter-border-radius, 1em);
+  box-sizing: border-box;
+  color: var(--fa-inverse, #fff);
+  line-height: var(--fa-counter-line-height, 1);
+  max-width: var(--fa-counter-max-width, 5em);
+  min-width: var(--fa-counter-min-width, 1.5em);
+  overflow: hidden;
+  padding: var(--fa-counter-padding, 0.25em 0.5em);
+  right: var(--fa-right, 0);
+  text-overflow: ellipsis;
+  top: var(--fa-top, 0);
+  transform: scale(var(--fa-counter-scale, 0.25));
+  transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: var(--fa-bottom, 0);
+  right: var(--fa-right, 0);
+  top: auto;
+  transform: scale(var(--fa-layers-scale, 0.25));
+  transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: var(--fa-bottom, 0);
+  left: var(--fa-left, 0);
+  right: auto;
+  top: auto;
+  transform: scale(var(--fa-layers-scale, 0.25));
+  transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  top: var(--fa-top, 0);
+  right: var(--fa-right, 0);
+  transform: scale(var(--fa-layers-scale, 0.25));
+  transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: var(--fa-left, 0);
+  right: auto;
+  top: var(--fa-top, 0);
+  transform: scale(var(--fa-layers-scale, 0.25));
+  transform-origin: top left;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-2xs {
+  font-size: 0.625em;
+  line-height: 0.1em;
+  vertical-align: 0.225em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+  line-height: 0.0833333337em;
+  vertical-align: 0.125em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+  line-height: 0.0714285718em;
+  vertical-align: 0.0535714295em;
+}
+
+.fa-lg {
+  font-size: 1.25em;
+  line-height: 0.05em;
+  vertical-align: -0.075em;
+}
+
+.fa-xl {
+  font-size: 1.5em;
+  line-height: 0.0416666682em;
+  vertical-align: -0.125em;
+}
+
+.fa-2xl {
+  font-size: 2em;
+  line-height: 0.03125em;
+  vertical-align: -0.1875em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: var(--fa-li-margin, 2.5em);
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: calc(-1 * var(--fa-li-width, 2em));
+  position: absolute;
+  text-align: center;
+  width: var(--fa-li-width, 2em);
+  line-height: inherit;
+}
+
+.fa-border {
+  border-color: var(--fa-border-color, #eee);
+  border-radius: var(--fa-border-radius, 0.1em);
+  border-style: var(--fa-border-style, solid);
+  border-width: var(--fa-border-width, 0.08em);
+  padding: var(--fa-border-padding, 0.2em 0.25em 0.15em);
+}
+
+.fa-pull-left {
+  float: left;
+  margin-right: var(--fa-pull-margin, 0.3em);
+}
+
+.fa-pull-right {
+  float: right;
+  margin-left: var(--fa-pull-margin, 0.3em);
+}
+
+.fa-beat {
+  animation-name: fa-beat;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, ease-in-out);
+}
+
+.fa-bounce {
+  animation-name: fa-bounce;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));
+}
+
+.fa-fade {
+  animation-name: fa-fade;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+}
+
+.fa-beat-fade {
+  animation-name: fa-beat-fade;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+}
+
+.fa-flip {
+  animation-name: fa-flip;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, ease-in-out);
+}
+
+.fa-shake {
+  animation-name: fa-shake;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, linear);
+}
+
+.fa-spin {
+  animation-name: fa-spin;
+  animation-delay: var(--fa-animation-delay, 0s);
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 2s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, linear);
+}
+
+.fa-spin-reverse {
+  --fa-animation-direction: reverse;
+}
+
+.fa-pulse,
+.fa-spin-pulse {
+  animation-name: fa-spin;
+  animation-direction: var(--fa-animation-direction, normal);
+  animation-duration: var(--fa-animation-duration, 1s);
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+  animation-timing-function: var(--fa-animation-timing, steps(8));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-beat,
+.fa-bounce,
+.fa-fade,
+.fa-beat-fade,
+.fa-flip,
+.fa-pulse,
+.fa-shake,
+.fa-spin,
+.fa-spin-pulse {
+    animation-delay: -1ms;
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+    transition-delay: 0s;
+    transition-duration: 0s;
+  }
+}
+@keyframes fa-beat {
+  0%, 90% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(var(--fa-beat-scale, 1.25));
+  }
+}
+@keyframes fa-bounce {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);
+  }
+  30% {
+    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));
+  }
+  50% {
+    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);
+  }
+  57% {
+    transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));
+  }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
+}
+@keyframes fa-fade {
+  50% {
+    opacity: var(--fa-fade-opacity, 0.4);
+  }
+}
+@keyframes fa-beat-fade {
+  0%, 100% {
+    opacity: var(--fa-beat-fade-opacity, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(var(--fa-beat-fade-scale, 1.125));
+  }
+}
+@keyframes fa-flip {
+  50% {
+    transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+  }
+}
+@keyframes fa-shake {
+  0% {
+    transform: rotate(-15deg);
+  }
+  4% {
+    transform: rotate(15deg);
+  }
+  8%, 24% {
+    transform: rotate(-18deg);
+  }
+  12%, 28% {
+    transform: rotate(18deg);
+  }
+  16% {
+    transform: rotate(-22deg);
+  }
+  20% {
+    transform: rotate(22deg);
+  }
+  32% {
+    transform: rotate(-12deg);
+  }
+  36% {
+    transform: rotate(12deg);
+  }
+  40%, 100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.fa-rotate-90 {
+  transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  transform: scale(1, -1);
+}
+
+.fa-flip-both,
+.fa-flip-horizontal.fa-flip-vertical {
+  transform: scale(-1, -1);
+}
+
+.fa-rotate-by {
+  transform: rotate(var(--fa-rotate-angle, 0));
+}
+
+.fa-stack {
+  display: inline-block;
+  vertical-align: middle;
+  height: 2em;
+  position: relative;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: var(--fa-stack-z-index, auto);
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em;
+}
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em;
+}
+
+.fa-inverse {
+  color: var(--fa-inverse, #fff);
+}
+
+.sr-only,
+.fa-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:not(:focus),
+.fa-sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.svg-inline--fa .fa-primary {
+  fill: var(--fa-primary-color, currentColor);
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa .fa-secondary {
+  fill: var(--fa-secondary-color, currentColor);
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-primary {
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-secondary {
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa mask .fa-primary,
+.svg-inline--fa mask .fa-secondary {
+  fill: black;
+}</style><link rel="stylesheet" type="text/css" href="./The PDF Format — pypdf 5.2.0 documentation_files/pygments.css">
+      <link rel="stylesheet" type="text/css" href="./The PDF Format — pypdf 5.2.0 documentation_files/theme.css">
+
+  
+      <script src="./The PDF Format — pypdf 5.2.0 documentation_files/jquery.js.download"></script>
+      <script src="./The PDF Format — pypdf 5.2.0 documentation_files/_sphinx_javascript_frameworks_compat.js.download"></script>
+      <script src="./The PDF Format — pypdf 5.2.0 documentation_files/documentation_options.js.download"></script>
+      <script src="./The PDF Format — pypdf 5.2.0 documentation_files/doctools.js.download"></script>
+      <script src="./The PDF Format — pypdf 5.2.0 documentation_files/sphinx_highlight.js.download"></script>
+    <script src="./The PDF Format — pypdf 5.2.0 documentation_files/theme.js.download"></script>
+    <script src="./The PDF Format — pypdf 5.2.0 documentation_files/versions.js.download"></script>
+    <link rel="index" title="Index" href="https://pypdf.readthedocs.io/en/stable/genindex.html">
+    <link rel="search" title="Search" href="https://pypdf.readthedocs.io/en/stable/search.html">
+    <link rel="next" title="How pypdf parses PDF files" href="https://pypdf.readthedocs.io/en/stable/dev/pypdf-parsing.html">
+    <link rel="prev" title="Developer Intro" href="https://pypdf.readthedocs.io/en/stable/dev/intro.html"> 
+<script async="" type="text/javascript" src="./The PDF Format — pypdf 5.2.0 documentation_files/readthedocs-addons.js.download"></script><meta name="readthedocs-project-slug" content="pypdf"><meta name="readthedocs-version-slug" content="stable"><meta name="readthedocs-resolver-filename" content="/dev/pdf-format.html"><meta name="readthedocs-http-status" content="200"><script id="ethicaladsjs" type="text/javascript" async="true" src="./The PDF Format — pypdf 5.2.0 documentation_files/ethicalads.min.js.download"></script><style>[data-ea-publisher].loaded,[data-ea-type].loaded{font-size:14px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-weight:normal;font-style:normal;letter-spacing:0px;vertical-align:baseline;line-height:1.3em}[data-ea-publisher].loaded a,[data-ea-type].loaded a{text-decoration:none}[data-ea-publisher].loaded .ea-pixel,[data-ea-type].loaded .ea-pixel{display:none}[data-ea-publisher].loaded .ea-content,[data-ea-type].loaded .ea-content{margin:1em 1em .5em 1em;padding:1em;background:rgba(0,0,0,.03);color:#505050}[data-ea-publisher].loaded .ea-content a:link,[data-ea-type].loaded .ea-content a:link{color:#505050}[data-ea-publisher].loaded .ea-content a:visited,[data-ea-type].loaded .ea-content a:visited{color:#505050}[data-ea-publisher].loaded .ea-content a:hover,[data-ea-type].loaded .ea-content a:hover{color:#373737}[data-ea-publisher].loaded .ea-content a:active,[data-ea-type].loaded .ea-content a:active{color:#373737}[data-ea-publisher].loaded .ea-content a strong,[data-ea-publisher].loaded .ea-content a b,[data-ea-type].loaded .ea-content a strong,[data-ea-type].loaded .ea-content a b{color:#088cdb}[data-ea-publisher].loaded .ea-callout a:link,[data-ea-type].loaded .ea-callout a:link{color:#6a6a6a}[data-ea-publisher].loaded .ea-callout a:visited,[data-ea-type].loaded .ea-callout a:visited{color:#6a6a6a}[data-ea-publisher].loaded .ea-callout a:hover,[data-ea-type].loaded .ea-callout a:hover{color:#505050}[data-ea-publisher].loaded .ea-callout a:active,[data-ea-type].loaded .ea-callout a:active{color:#505050}[data-ea-publisher].loaded .ea-callout a strong,[data-ea-publisher].loaded .ea-callout a b,[data-ea-type].loaded .ea-callout a strong,[data-ea-type].loaded .ea-callout a b{color:#088cdb}[data-ea-publisher].loaded .ea-callout a,[data-ea-type].loaded .ea-callout a{font-size:.8em}[data-ea-publisher].loaded .ea-domain,[data-ea-type].loaded .ea-domain{margin-top:.75em;font-size:.8em;text-align:center;color:#9d9d9d}[data-ea-publisher].loaded.dark .ea-content,[data-ea-type].loaded.dark .ea-content{background:rgba(255,255,255,.05);color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:link,[data-ea-type].loaded.dark .ea-content a:link{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:visited,[data-ea-type].loaded.dark .ea-content a:visited{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-content a:hover,[data-ea-type].loaded.dark .ea-content a:hover{color:#f6f6f6}[data-ea-publisher].loaded.dark .ea-content a:active,[data-ea-type].loaded.dark .ea-content a:active{color:#f6f6f6}[data-ea-publisher].loaded.dark .ea-content a strong,[data-ea-publisher].loaded.dark .ea-content a b,[data-ea-type].loaded.dark .ea-content a strong,[data-ea-type].loaded.dark .ea-content a b{color:#50baf9}[data-ea-publisher].loaded.dark .ea-callout a:link,[data-ea-type].loaded.dark .ea-callout a:link{color:#c3c3c3}[data-ea-publisher].loaded.dark .ea-callout a:visited,[data-ea-type].loaded.dark .ea-callout a:visited{color:#c3c3c3}[data-ea-publisher].loaded.dark .ea-callout a:hover,[data-ea-type].loaded.dark .ea-callout a:hover{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-callout a:active,[data-ea-type].loaded.dark .ea-callout a:active{color:#dcdcdc}[data-ea-publisher].loaded.dark .ea-callout a strong,[data-ea-publisher].loaded.dark .ea-callout a b,[data-ea-type].loaded.dark .ea-callout a strong,[data-ea-type].loaded.dark .ea-callout a b{color:#50baf9}[data-ea-publisher].loaded.dark .ea-domain,[data-ea-type].loaded.dark .ea-domain{color:#909090}@media(prefers-color-scheme: dark){[data-ea-publisher].loaded.adaptive .ea-content,[data-ea-type].loaded.adaptive .ea-content{background:rgba(255,255,255,.05);color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:link,[data-ea-type].loaded.adaptive .ea-content a:link{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:visited,[data-ea-type].loaded.adaptive .ea-content a:visited{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-content a:hover,[data-ea-type].loaded.adaptive .ea-content a:hover{color:#f6f6f6}[data-ea-publisher].loaded.adaptive .ea-content a:active,[data-ea-type].loaded.adaptive .ea-content a:active{color:#f6f6f6}[data-ea-publisher].loaded.adaptive .ea-content a strong,[data-ea-publisher].loaded.adaptive .ea-content a b,[data-ea-type].loaded.adaptive .ea-content a strong,[data-ea-type].loaded.adaptive .ea-content a b{color:#50baf9}[data-ea-publisher].loaded.adaptive .ea-callout a:link,[data-ea-type].loaded.adaptive .ea-callout a:link{color:#c3c3c3}[data-ea-publisher].loaded.adaptive .ea-callout a:visited,[data-ea-type].loaded.adaptive .ea-callout a:visited{color:#c3c3c3}[data-ea-publisher].loaded.adaptive .ea-callout a:hover,[data-ea-type].loaded.adaptive .ea-callout a:hover{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-callout a:active,[data-ea-type].loaded.adaptive .ea-callout a:active{color:#dcdcdc}[data-ea-publisher].loaded.adaptive .ea-callout a strong,[data-ea-publisher].loaded.adaptive .ea-callout a b,[data-ea-type].loaded.adaptive .ea-callout a strong,[data-ea-type].loaded.adaptive .ea-callout a b{color:#50baf9}[data-ea-publisher].loaded.adaptive .ea-domain,[data-ea-type].loaded.adaptive .ea-domain{color:#909090}}[data-ea-publisher].loaded .ea-content,[data-ea-type].loaded .ea-content{border:0px;border-radius:3px;box-shadow:0px 2px 3px rgba(0,0,0,.15)}[data-ea-publisher].loaded.raised .ea-content,[data-ea-type].loaded.raised .ea-content{border:0px;border-radius:3px;box-shadow:0px 2px 3px rgba(0,0,0,.15)}[data-ea-publisher].loaded.bordered .ea-content,[data-ea-type].loaded.bordered .ea-content{border:1px solid rgba(0,0,0,.04);border-radius:3px;box-shadow:none}[data-ea-publisher].loaded.bordered.dark .ea-content,[data-ea-type].loaded.bordered.dark .ea-content{border:1px solid rgba(255,255,255,.07)}@media(prefers-color-scheme: dark){[data-ea-publisher].loaded.bordered.adaptive .ea-content,[data-ea-type].loaded.bordered.adaptive .ea-content{border:1px solid rgba(255,255,255,.07)}}[data-ea-publisher].loaded.flat .ea-content,[data-ea-type].loaded.flat .ea-content{border:0px;border-radius:3px;box-shadow:none}[data-ea-type=image].loaded,[data-ea-publisher]:not([data-ea-type]).loaded,.ea-type-image{display:inline-block}[data-ea-type=image].loaded .ea-content,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content,.ea-type-image .ea-content{max-width:180px;overflow:auto;text-align:center}[data-ea-type=image].loaded .ea-content>a>img,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content>a>img,.ea-type-image .ea-content>a>img{width:120px;height:90px;display:inline-block}[data-ea-type=image].loaded .ea-content>.ea-text,[data-ea-publisher]:not([data-ea-type]).loaded .ea-content>.ea-text,.ea-type-image .ea-content>.ea-text{margin-top:1em;font-size:1em;text-align:center}[data-ea-type=image].loaded .ea-callout,[data-ea-publisher]:not([data-ea-type]).loaded .ea-callout,.ea-type-image .ea-callout{max-width:180px;margin:0em 1em 1em 1em;padding-left:1em;padding-right:1em;font-style:italic;text-align:right}[data-ea-type=image].loaded.horizontal .ea-content,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content,.ea-type-image.horizontal .ea-content{max-width:320px}[data-ea-type=image].loaded.horizontal .ea-content>a>img,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content>a>img,.ea-type-image.horizontal .ea-content>a>img{float:left;margin-right:1em}[data-ea-type=image].loaded.horizontal .ea-content .ea-text,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-content .ea-text,.ea-type-image.horizontal .ea-content .ea-text{margin-top:0em;text-align:left;overflow:auto}[data-ea-type=image].loaded.horizontal .ea-callout,[data-ea-publisher]:not([data-ea-type]).loaded.horizontal .ea-callout,.ea-type-image.horizontal .ea-callout{max-width:320px;text-align:right}[data-ea-type=text].loaded,.ea-type-text{font-size:14px}[data-ea-type=text].loaded .ea-content,.ea-type-text .ea-content{text-align:left}[data-ea-type=text].loaded .ea-callout,.ea-type-text .ea-callout{margin:.5em 1em 1em 1em;padding-left:1em;padding-right:1em;text-align:right;font-style:italic}[data-ea-style=stickybox].loaded{position:fixed;bottom:20px;right:20px;z-index:100}[data-ea-style=stickybox].loaded .ea-type-image .ea-stickybox-hide{cursor:pointer;position:absolute;top:.75em;right:.75em;background-color:#fefefe;border:1px solid #088cdb;border-radius:50%;color:#088cdb;font-size:1em;text-align:center;height:1.5em;width:1.5em;line-height:1.4}@media(max-width: 1300px){[data-ea-style=stickybox].loaded{position:static;bottom:0;right:0;margin:auto;text-align:center}[data-ea-style=stickybox].loaded .ea-stickybox-hide{display:none}}@media(min-width: 1301px){[data-ea-style=stickybox].loaded .ea-type-image .ea-content{background:#dcdcdc}[data-ea-style=stickybox].loaded.dark .ea-type-image .ea-content{background:#505050}}@media(min-width: 1301px)and (prefers-color-scheme: dark){[data-ea-style=stickybox].loaded.adaptive .ea-type-image .ea-content{background:#505050}}[data-ea-style=fixedfooter].loaded{position:fixed;bottom:0;left:0;z-index:200;width:100%;max-width:100%}[data-ea-style=fixedfooter].loaded .ea-type-text{width:100%;max-width:100%;display:flex;z-index:200;background:#dcdcdc}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-content{border:0px;border-radius:3px;box-shadow:none}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-content{background-color:inherit;max-width:100%;margin:0;padding:1em;flex:auto}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-callout{max-width:100%;margin:0;padding:1em;flex:initial}@media(max-width: 576px){[data-ea-style=fixedfooter].loaded .ea-type-text .ea-callout{display:none}}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-fixedfooter-hide{cursor:pointer;color:#505050;padding:1em;flex:initial;margin:auto 0}[data-ea-style=fixedfooter].loaded .ea-type-text .ea-fixedfooter-hide span{padding:.25em;font-size:.8em;font-weight:bold;border:.15em solid #505050;border-radius:.5em;white-space:nowrap}[data-ea-style=fixedfooter].loaded.dark .ea-type-text{background:#505050}[data-ea-style=fixedfooter].loaded.dark .ea-type-text .ea-fixedfooter-hide span{color:#dcdcdc;border-color:#dcdcdc}@media(prefers-color-scheme: dark){[data-ea-style=fixedfooter].loaded.adaptive .ea-type-text{background:#505050}[data-ea-style=fixedfooter].loaded.adaptive .ea-type-text .ea-fixedfooter-hide span{color:#dcdcdc;border-color:#dcdcdc}}</style><script src="./The PDF Format — pypdf 5.2.0 documentation_files/saved_resource" type="text/javascript" async=""></script></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+
+          
+          
+          <a href="https://pypdf.readthedocs.io/en/stable/index.html">
+            
+              <img src="./The PDF Format — pypdf 5.2.0 documentation_files/logo.webp" class="logo" alt="Logo">
+          </a>
+              <div class="switch-menus">
+                <div class="version-switch">
+    <select>
+      
+        <option value="latest" data-url="https://pypdf.readthedocs.io/en/latest/">
+              latest
+          </option>
+
+        <option value="stable" selected="selected" data-url="https://pypdf.readthedocs.io/en/stable/">
+              stable
+          </option>
+
+        <option value="5.2.0" data-url="https://pypdf.readthedocs.io/en/5.2.0/">
+              5.2.0
+          </option>
+
+        <option value="5.1.0" data-url="https://pypdf.readthedocs.io/en/5.1.0/">
+              5.1.0
+          </option>
+
+        <option value="5.0.1" data-url="https://pypdf.readthedocs.io/en/5.0.1/">
+              5.0.1
+          </option>
+
+        <option value="5.0.0" data-url="https://pypdf.readthedocs.io/en/5.0.0/">
+              5.0.0
+          </option>
+
+        <option value="4.3.1" data-url="https://pypdf.readthedocs.io/en/4.3.1/">
+              4.3.1
+          </option>
+
+        <option value="4.3.0" data-url="https://pypdf.readthedocs.io/en/4.3.0/">
+              4.3.0
+          </option>
+
+        <option value="4.2.0" data-url="https://pypdf.readthedocs.io/en/4.2.0/">
+              4.2.0
+          </option>
+
+        <option value="4.1.0" data-url="https://pypdf.readthedocs.io/en/4.1.0/">
+              4.1.0
+          </option>
+
+        <option value="4.0.2" data-url="https://pypdf.readthedocs.io/en/4.0.2/">
+              4.0.2
+          </option>
+
+        <option value="4.0.1" data-url="https://pypdf.readthedocs.io/en/4.0.1/">
+              4.0.1
+          </option>
+
+        <option value="4.0.0" data-url="https://pypdf.readthedocs.io/en/4.0.0/">
+              4.0.0
+          </option>
+
+        <option value="3.17.4" data-url="https://pypdf.readthedocs.io/en/3.17.4/">
+              3.17.4
+          </option>
+
+        <option value="3.17.3" data-url="https://pypdf.readthedocs.io/en/3.17.3/">
+              3.17.3
+          </option>
+
+        <option value="3.17.2" data-url="https://pypdf.readthedocs.io/en/3.17.2/">
+              3.17.2
+          </option>
+
+        <option value="3.17.1" data-url="https://pypdf.readthedocs.io/en/3.17.1/">
+              3.17.1
+          </option>
+
+        <option value="3.17.0" data-url="https://pypdf.readthedocs.io/en/3.17.0/">
+              3.17.0
+          </option>
+
+        <option value="3.16.4" data-url="https://pypdf.readthedocs.io/en/3.16.4/">
+              3.16.4
+          </option>
+
+        <option value="3.16.3" data-url="https://pypdf.readthedocs.io/en/3.16.3/">
+              3.16.3
+          </option>
+
+        <option value="3.16.2" data-url="https://pypdf.readthedocs.io/en/3.16.2/">
+              3.16.2
+          </option>
+
+        <option value="3.16.1" data-url="https://pypdf.readthedocs.io/en/3.16.1/">
+              3.16.1
+          </option>
+
+        <option value="3.16.0" data-url="https://pypdf.readthedocs.io/en/3.16.0/">
+              3.16.0
+          </option>
+
+        <option value="3.15.5" data-url="https://pypdf.readthedocs.io/en/3.15.5/">
+              3.15.5
+          </option>
+
+        <option value="3.15.4" data-url="https://pypdf.readthedocs.io/en/3.15.4/">
+              3.15.4
+          </option>
+
+        <option value="3.15.3" data-url="https://pypdf.readthedocs.io/en/3.15.3/">
+              3.15.3
+          </option>
+
+        <option value="3.15.2" data-url="https://pypdf.readthedocs.io/en/3.15.2/">
+              3.15.2
+          </option>
+
+        <option value="3.15.1" data-url="https://pypdf.readthedocs.io/en/3.15.1/">
+              3.15.1
+          </option>
+
+        <option value="3.15.0" data-url="https://pypdf.readthedocs.io/en/3.15.0/">
+              3.15.0
+          </option>
+
+        <option value="3.14.0" data-url="https://pypdf.readthedocs.io/en/3.14.0/">
+              3.14.0
+          </option>
+
+        <option value="3.13.0" data-url="https://pypdf.readthedocs.io/en/3.13.0/">
+              3.13.0
+          </option>
+
+        <option value="3.12.2" data-url="https://pypdf.readthedocs.io/en/3.12.2/">
+              3.12.2
+          </option>
+
+        <option value="3.12.1" data-url="https://pypdf.readthedocs.io/en/3.12.1/">
+              3.12.1
+          </option>
+
+        <option value="3.12.0" data-url="https://pypdf.readthedocs.io/en/3.12.0/">
+              3.12.0
+          </option>
+
+        <option value="3.11.1" data-url="https://pypdf.readthedocs.io/en/3.11.1/">
+              3.11.1
+          </option>
+
+        <option value="3.11.0" data-url="https://pypdf.readthedocs.io/en/3.11.0/">
+              3.11.0
+          </option>
+
+        <option value="3.10.0" data-url="https://pypdf.readthedocs.io/en/3.10.0/">
+              3.10.0
+          </option>
+
+        <option value="3.9.1" data-url="https://pypdf.readthedocs.io/en/3.9.1/">
+              3.9.1
+          </option>
+
+        <option value="3.9.0" data-url="https://pypdf.readthedocs.io/en/3.9.0/">
+              3.9.0
+          </option>
+
+        <option value="3.8.1" data-url="https://pypdf.readthedocs.io/en/3.8.1/">
+              3.8.1
+          </option>
+
+        <option value="3.8.0" data-url="https://pypdf.readthedocs.io/en/3.8.0/">
+              3.8.0
+          </option>
+
+        <option value="3.7.1" data-url="https://pypdf.readthedocs.io/en/3.7.1/">
+              3.7.1
+          </option>
+
+        <option value="3.7.0" data-url="https://pypdf.readthedocs.io/en/3.7.0/">
+              3.7.0
+          </option>
+
+        <option value="3.6.0" data-url="https://pypdf.readthedocs.io/en/3.6.0/">
+              3.6.0
+          </option>
+
+        <option value="3.5.2" data-url="https://pypdf.readthedocs.io/en/3.5.2/">
+              3.5.2
+          </option>
+
+        <option value="3.5.1" data-url="https://pypdf.readthedocs.io/en/3.5.1/">
+              3.5.1
+          </option>
+
+        <option value="3.5.0" data-url="https://pypdf.readthedocs.io/en/3.5.0/">
+              3.5.0
+          </option>
+
+        <option value="3.4.1" data-url="https://pypdf.readthedocs.io/en/3.4.1/">
+              3.4.1
+          </option>
+
+        <option value="3.4.0" data-url="https://pypdf.readthedocs.io/en/3.4.0/">
+              3.4.0
+          </option>
+
+        <option value="3.3.0" data-url="https://pypdf.readthedocs.io/en/3.3.0/">
+              3.3.0
+          </option>
+
+        <option value="3.2.0" data-url="https://pypdf.readthedocs.io/en/3.2.0/">
+              3.2.0
+          </option>
+
+        <option value="3.1.0" data-url="https://pypdf.readthedocs.io/en/3.1.0/">
+              3.1.0
+          </option>
+
+        <option value="3.0.0" data-url="https://pypdf.readthedocs.io/en/3.0.0/">
+              3.0.0
+          </option>
+    </select>
+  </div>
+                
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="https://pypdf.readthedocs.io/en/stable/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs">
+    <input type="hidden" name="check_keywords" value="yes">
+    <input type="hidden" name="area" value="default">
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/migration-1-to-2.html">Migration Guide: 1.x to 2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/migration-1-to-2.html#imports-and-modules">Imports and Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/migration-1-to-2.html#naming-adjustments">Naming Adjustments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/robustness.html">Robustness and strict=False</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/suppress-warnings.html">Exceptions, Warnings, and Log messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/metadata.html">Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/extract-text.html">Extract Text from a PDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/post-processing-in-text-extraction.html">Post-Processing of Text Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/extract-images.html">Extract Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/extract-images.html#other-images">Other images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/extract-attachments.html">Extract Attachments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/encryption-decryption.html">Encryption and Decryption of PDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/merging-pdfs.html">Merging PDF files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/cropping-and-transforming.html">Cropping and Transforming PDFs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/cropping-and-transforming.html#transforming-several-copies-of-the-same-page">Transforming several copies of the same page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/reading-pdf-annotations.html">Reading PDF Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/adding-pdf-annotations.html">Adding PDF Annotations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/add-watermark.html">Adding a Stamp or Watermark to a PDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/add-javascript.html">Adding JavaScript to a PDF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/viewer-preferences.html">Adding Viewer Preferences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/forms.html">Interactions with PDF Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/streaming-data.html">Streaming Data with pypdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/file-size.html">Reduce PDF File Size</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/pdf-version-support.html">PDF Version Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/user/pdfa-compliance.html">PDF/A Compliance</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/PdfReader.html">The PdfReader Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/PdfWriter.html">The PdfWriter Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/Destination.html">The Destination Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/DocumentInformation.html">The DocumentInformation Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/Field.html">The Field Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/Fit.html">The Fit Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/PageObject.html">The PageObject Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/PageRange.html">The PageRange Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/PaperSize.html">The PaperSize Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/RectangleObject.html">The RectangleObject Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/Transformation.html">The Transformation Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/XmpInformation.html">The XmpInformation Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/annotations.html">The annotations module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/errors.html">Errors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/generic.html">Generic PDF objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/modules/PdfDocCommon.html">The PdfDocCommon Class</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current" aria-expanded="true">
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/intro.html">Developer Intro</a></li>
+<li class="toctree-l1 current" aria-expanded="true"><a class="reference internal current" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#" aria-expanded="true"><button class="toctree-expand" title="Open/close menu"></button>The PDF Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#overall-structure">Overall Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#the-xref-table">The xref table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#the-body">The body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#the-trailer">The trailer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#reading-pdf-files">Reading PDF files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/pypdf-parsing.html">How pypdf parses PDF files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/pypdf-writing.html">How pypdf writes PDF files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/cmaps.html">CMaps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/deprecations.html">The Deprecation Process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/dev/releasing.html">Releasing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About pypdf</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/CHANGELOG.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/changelog-v1.html">Changelog of PyPDF2 1.X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/project-governance.html">Project Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/taking-ownership.html">Taking Ownership of pypdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/history.html">History of pypdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/scope-of-pypdf.html">Scope of pypdf</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/comparisons.html">pypdf vs X</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pypdf.readthedocs.io/en/stable/meta/faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="https://pypdf.readthedocs.io/en/stable/index.html">pypdf</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="https://pypdf.readthedocs.io/en/stable/index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The PDF Format</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="https://pypdf.readthedocs.io/en/stable/_sources/dev/pdf-format.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="the-pdf-format">
+<h1>The PDF Format<a class="headerlink" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#the-pdf-format" title="Link to this heading"></a></h1>
+<p>It is recommended to look in the PDF specification for details and clarifications.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pdfa.org/resource/pdf-specification-archive/">PDF Specification Archive</a></p></li>
+<li><p><a class="reference external" href="https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/pdfreference1.0.pdf">Portable Document Format Reference Manual, 1993. ISBN 0-201-62628-4</a></p></li>
+<li><p><a class="reference external" href="https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf">ISO 32000-1:2008 (PDF 1.7)</a></p></li>
+<li><p>ISO 32000-2:2020 (PDF 2.0)</p></li>
+</ul>
+<p>Below is only intended to give a very rough overview of the format.</p>
+<section id="overall-structure">
+<h2>Overall Structure<a class="headerlink" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#overall-structure" title="Link to this heading"></a></h2>
+<p>A PDF consists of:</p>
+<ol class="arabic simple">
+<li><p>Header: Contains the version of the PDF, e.g. <code class="docutils literal notranslate"><span class="pre">%PDF-1.7</span></code></p></li>
+<li><p>Body: Contains a sequence of indirect objects</p></li>
+<li><p>Cross-reference table (xref): Contains a list of the indirect objects in the body</p></li>
+<li><p>Trailer</p></li>
+</ol>
+</section>
+<section id="the-xref-table">
+<h2>The xref table<a class="headerlink" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#the-xref-table" title="Link to this heading"></a></h2>
+<p>A cross-reference table (xref) is a table of the indirect objects in the body.
+It allows quick access to those objects by pointing to their location in the file.</p>
+<p>It looks like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>xref 42 5
+0000001000 65535 f
+0000001234 00000 n
+0000001987 00000 n
+0000011987 00000 n
+0000031987 00000 n
+</pre></div>
+</div>
+<p>Let’s go through it step-by-step:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xref</span></code> is just a keyword that specifies the start of the xref table.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">42</span></code> is the numerical ID of the first object in this xref section; <code class="docutils literal notranslate"><span class="pre">5</span></code> is the number of entries in the xref table.</p></li>
+<li><p>Now every object has 3 entries <code class="docutils literal notranslate"><span class="pre">nnnnnnnnnn</span> <span class="pre">ggggg</span> <span class="pre">n</span></code>: a 10-digit byte offset,
+a 5-digit generation number, and a literal keyword which is either <code class="docutils literal notranslate"><span class="pre">n</span></code> or <code class="docutils literal notranslate"><span class="pre">f</span></code>.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">nnnnnnnnnn</span></code> is the byte offset of the object. It tells the reader where
+the object is in the file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ggggg</span></code> is the generation number. It tells the reader how old the object is.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span></code> means that the object is a normal in-use object, <code class="docutils literal notranslate"><span class="pre">f</span></code> means that the object
+is a free object.</p>
+<ul>
+<li><p>The first free object always has a generation number of 65535. It forms
+the head of a linked-list of all free objects.</p></li>
+<li><p>The generation number of a normal object is always 0. The generation
+number allows the PDF format to contain multiple versions of the same
+object. This is a version history mechanism.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="the-body">
+<h2>The body<a class="headerlink" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#the-body" title="Link to this heading"></a></h2>
+<p>The body is a sequence of indirect objects:</p>
+<p><code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">generation_number</span> <span class="pre">&lt;&lt;</span> <span class="pre">the_object</span> <span class="pre">&gt;&gt;</span> <span class="pre">endobj</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">counter</span></code> (integer) is a unique identifier for the object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">generation_number</span></code> (integer) is the generation number of the object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">the_object</span></code> is the object itself. It can be empty. Starts with <code class="docutils literal notranslate"><span class="pre">/Keyword</span></code> to
+specify which kind of object it is.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">endobj</span></code> marks the end of the object.</p></li>
+</ul>
+<p>A concrete example can be found in <code class="docutils literal notranslate"><span class="pre">test_reader.py::test_get_images_raw</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1 0 obj &lt;&lt; /Count 1 /Kids [4 0 R] /Type /Pages &gt;&gt; endobj
+2 0 obj &lt;&lt; &gt;&gt; endobj
+3 0 obj &lt;&lt; &gt;&gt; endobj
+4 0 obj &lt;&lt; /Contents 3 0 R /CropBox [0.0 0.0 2550.0 3508.0]
+ /MediaBox [0.0 0.0 2550.0 3508.0] /Parent 1 0 R
+ /Resources &lt;&lt; /Font &lt;&lt; &gt;&gt; &gt;&gt;
+ /Rotate 0 /Type /Page &gt;&gt; endobj
+5 0 obj &lt;&lt; /Pages 1 0 R /Type /Catalog &gt;&gt; endobj
+</pre></div>
+</div>
+</section>
+<section id="the-trailer">
+<h2>The trailer<a class="headerlink" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#the-trailer" title="Link to this heading"></a></h2>
+<p>The trailer looks like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>trailer &lt;&lt; /Root 5 0 R
+           /Size 6
+        &gt;&gt;
+startxref 1234
+%%EOF
+</pre></div>
+</div>
+<p>Let’s go through it:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">trailer</span> <span class="pre">&lt;&lt;</span></code> indicates that the <em>trailer dictionary</em> starts. It ends with <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startxref</span></code> is a keyword followed by the byte-location of the <code class="docutils literal notranslate"><span class="pre">xref</span></code> keyword.
+As the trailer is always at the bottom of the file, this allows readers to
+quickly find the xref table.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%%EOF</span></code> is the end-of-file marker.</p></li>
+</ul>
+<p>The trailer dictionary is a key-value list. The keys are specified in
+Table 15 of the PDF Reference 1.7, e.g. <code class="docutils literal notranslate"><span class="pre">/Root</span></code> and <code class="docutils literal notranslate"><span class="pre">/Size</span></code> (both are required).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/Root</span></code> (dictionary) contains the document catalog.</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">5</span></code> is the object number of the catalog dictionary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> is the generation number of the catalog dictionary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R</span></code> is the keyword that indicates that the object is a reference to the
+catalog dictionary.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/Size</span></code> (integer) contains the total number of entries in the files xref table.</p></li>
+</ul>
+</section>
+<section id="reading-pdf-files">
+<h2>Reading PDF files<a class="headerlink" href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html#reading-pdf-files" title="Link to this heading"></a></h2>
+<p>Most PDF files are compressed. If you want to read them, first uncompress them:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pdftk<span class="w"> </span>crazyones.pdf<span class="w"> </span>output<span class="w"> </span>crazyones-uncomp.pdf<span class="w"> </span>uncompress
+</pre></div>
+</div>
+<p>Then rename <code class="docutils literal notranslate"><span class="pre">crazyones-uncomp.pdf</span></code> to <code class="docutils literal notranslate"><span class="pre">crazyones-uncomp.txt</span></code> and open it in
+your favorite IDE / text editor.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="https://pypdf.readthedocs.io/en/stable/dev/intro.html" class="btn btn-neutral float-left" title="Developer Intro" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="https://pypdf.readthedocs.io/en/stable/dev/pypdf-parsing.html" class="btn btn-neutral float-right" title="How pypdf parses PDF files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr>
+
+  <div role="contentinfo">
+    <p>© Copyright 2006 - 2025, Mathieu Fenniak and pypdf contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org/">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+
+<readthedocs-flyout><template shadowrootmode="open"><!---->
+      <div class=" floating container bottom-right ">
+        <!--?lit$453655903$-->
+      <header>
+        <img class="logo" alt="Read the Docs" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmc6c3ZnCiAgIHZlcnNpb249IjEuMSIKICAgaWQ9InN2ZyIKICAgeD0iMHB4IgogICB5PSIwcHgiCiAgIHZpZXdCb3g9IjY5NCAxOTcgMzQ2LjY5ODU1IDM5OS45ODQ3NyIKICAgc29kaXBvZGk6ZG9jbmFtZT0ibG9nby1saWdodC5zdmciCiAgIHdpZHRoPSIzNDYuNjk4NTUiCiAgIGhlaWdodD0iMzk5Ljk4NDc3IgogICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjMuMiAoMDkxZTIwZWYwZiwgMjAyMy0xMS0yNSwgY3VzdG9tKSIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHN2ZzpkZWZzCiAgICAgaWQ9ImRlZnMxMiIgLz4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzEyIgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzAwMDAwMCIKICAgICBib3JkZXJvcGFjaXR5PSIwLjI1IgogICAgIGlua3NjYXBlOnNob3dwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkZXNrY29sb3I9IiNkMWQxZDEiCiAgICAgaW5rc2NhcGU6em9vbT0iMS4yNTIiCiAgICAgaW5rc2NhcGU6Y3g9Ijk5OC40MDI1NiIKICAgICBpbmtzY2FwZTpjeT0iMTk5LjY4MDUxIgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMzQ0MCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMzg5IgogICAgIGlua3NjYXBlOndpbmRvdy14PSIwIgogICAgIGlua3NjYXBlOndpbmRvdy15PSIyNyIKICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIgogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9InN2ZyIgLz4KICA8c3ZnOmcKICAgICBpZD0ibG9nbyIKICAgICB0cmFuc2Zvcm09Im1hdHJpeCgwLjU1NzUzNjQ0LDAsMCwwLjU1NzUzNjQ0LDY2LjUzMTgxMiwxMDUwLjEyNjIpIj4KICAgIDxzdmc6cGF0aAogICAgICAgc3R5bGU9ImZpbGw6I2ZjZmNmYyIKICAgICAgIGQ9Im0gMTQwOC4xLC0xMTgxLjcgYyAtNy41LDEgLTEyLjcsNy44IC0xMS43LDE1LjMgMC43LDUuNCA0LjYsOS45IDkuOSwxMS4zIDAsMCAzMy4yLDExIDg5LjcsMTUuNiA0NS40LDMuNyA5Ni45LC0zLjIgOTYuOSwtMy4yIDcuNSwtMC4yIDEzLjUsLTYuNSAxMy4yLC0xNCAtMC4zLC03LjUgLTYuNSwtMTMuNSAtMTQsLTEzLjIgLTAuOSwwIC0xLjgsMC4xIC0yLjYsMC4zIDAsMCAtNTAuNCw2LjIgLTkxLjMsMi45IC01NCwtNC40IC04My40LC0xNC4zIC04My40LC0xNC4zIC0yLjIsLTAuNyAtNC41LC0xIC02LjcsLTAuNyB6IG0gMCwtNjcuNiBjIC03LjUsMSAtMTIuNyw3LjggLTExLjcsMTUuMyAwLjcsNS40IDQuNiw5LjkgOS45LDExLjMgMCwwIDMzLjIsMTEgODkuNywxNS42IDQ1LjQsMy43IDk2LjksLTMuMiA5Ni45LC0zLjIgNy41LC0wLjIgMTMuNSwtNi41IDEzLjIsLTE0IC0wLjMsLTcuNSAtNi41LC0xMy41IC0xNCwtMTMuMiAtMC45LDAgLTEuOCwwLjEgLTIuNiwwLjMgMCwwIC01MC40LDYuMiAtOTEuMywyLjkgLTU0LC00LjQgLTgzLjQsLTE0LjMgLTgzLjQsLTE0LjMgLTIuMiwtMC43IC00LjUsLTEgLTYuNywtMC43IHogbSAwLC02Ny42IGMgLTcuNSwxIC0xMi43LDcuOCAtMTEuNywxNS4zIDAuNyw1LjQgNC42LDkuOSA5LjksMTEuMyAwLDAgMzMuMiwxMSA4OS43LDE1LjYgNDUuNCwzLjcgOTYuOSwtMy4yIDk2LjksLTMuMiA3LjUsLTAuMiAxMy41LC02LjUgMTMuMiwtMTQgLTAuMywtNy41IC02LjUsLTEzLjUgLTE0LC0xMy4yIC0wLjksMCAtMS44LDAuMSAtMi42LDAuMyAwLDAgLTUwLjQsNi4yIC05MS4zLDIuOSAtNTQsLTQuNCAtODMuNCwtMTQuMyAtODMuNCwtMTQuMyAtMi4yLC0wLjcgLTQuNSwtMSAtNi43LC0wLjcgeiBtIDAsLTY3LjUgYyAtNy41LDEgLTEyLjcsNy44IC0xMS43LDE1LjMgMC43LDUuNCA0LjYsOS45IDkuOSwxMS4zIDAsMCAzMy4yLDExIDg5LjcsMTUuNiA0NS40LDMuNyA5Ni45LC0zLjIgOTYuOSwtMy4yIDcuNSwtMC4yIDEzLjUsLTYuNSAxMy4yLC0xNCAtMC4zLC03LjUgLTYuNSwtMTMuNSAtMTQsLTEzLjIgLTAuOSwwIC0xLjgsMC4xIC0yLjYsMC4zIDAsMCAtNTAuNCw2LjIgLTkxLjMsMi45IC01NCwtNC40IC04My40LC0xNC4zIC04My40LC0xNC4zIC0yLjIsLTAuOCAtNC41LC0xIC02LjcsLTAuNyB6IG0gLTk0LjcsLTcxLjMgYyAtNzEsMC41IC05Ny41LDIyLjMgLTk3LjUsMjIuMyB2IDUzMC4zIGMgMCwwIDI1LjgsLTIyLjMgMTA5LC0xOC45IDgzLjIsMy40IDEwMC4zLDMyLjYgMjAyLjUsMzQuNiAxMDIuMiwyLjEgMTI3LjksLTE1LjcgMTI3LjksLTE1LjcgbCAxLjUsLTU0MC42IGMgMCwwIC00NiwxMyAtMTM1LjUsMTMuNyAtODkuNSwwLjcgLTExMSwtMjIuOCAtMTkzLjIsLTI1LjUgLTUuMSwtMC4xIC0xMCwtMC4yIC0xNC43LC0wLjIgeiBtIDU5LjQsMzQuNiBjIDAsMCA0MywxNC4yIDEyMi41LDE4LjIgNjcuMiwzLjMgMTM0LjUsLTYuNiAxMzQuNSwtNi42IFYgLTkyOSBjIDAsMCAtMzQuMSwxNy45IC0xMTkuMywxMS44IC02NiwtNC43IC0xMzguNywtMjkuNyAtMTM4LjcsLTI5LjcgeiBtIC00MS41LDEyLjUgYyA3LjYsMCAxMy43LDYuMiAxMy43LDEzLjcgMCw3LjUgLTYuMiwxMy43IC0xMy43LDEzLjcgMCwwIC0yMi4zLDAuMSAtMzUuOCwxLjUgLTIyLjgsMi4zIC0zOC4zLDEwLjYgLTM4LjMsMTAuNiAtNi43LDMuNSAtMTUsMSAtMTguNSwtNS43IC0zLjUsLTYuNyAtMSwtMTUgNS43LC0xOC41IDAsMCAwLDAgMCwwIDAsMCAyMC4yLC0xMC43IDQ4LjQsLTEzLjUgMTYuMywtMS43IDM4LjUsLTEuOCAzOC41LC0xLjggeiBtIC0xMy4yLDY3LjggYyA3LjYsLTAuMiAxMy4zLDAgMTMuMywwIDcuNSwwLjkgMTIuOSw3LjggMTIsMTUuMyAtMC44LDYuMyAtNS43LDExLjIgLTEyLDEyIDAsMCAtMjIuMywwLjEgLTM1LjgsMS41IC0yMi44LDIuMyAtMzguMywxMC42IC0zOC4zLDEwLjYgLTYuNywzLjUgLTE1LDAuOSAtMTguNSwtNS44IC0zLjUsLTYuNyAtMC45LC0xNSA1LjgsLTE4LjUgMCwwIDIwLjIsLTEwLjcgNDguNCwtMTMuNSA3LjksLTAuOSAxNy41LC0xLjQgMjUuMSwtMS42IHogbSAxMy4yLDY3LjUgYyA3LjYsMCAxMy43LDYuMiAxMy43LDEzLjcgMCw3LjYgLTYuMiwxMy43IC0xMy43LDEzLjcgMCwwIC0yMi4zLC0wLjEgLTM1LjgsMS4yIC0yMi44LDIuMyAtMzguMywxMC42IC0zOC4zLDEwLjYgLTYuNywzLjUgLTE1LDAuOSAtMTguNSwtNS44IC0zLjUsLTYuNyAtMC45LC0xNSA1LjgsLTE4LjUgMCwwIDIwLjIsLTEwLjcgNDguNCwtMTMuNSAxNi4yLC0xLjUgMzguNCwtMS40IDM4LjQsLTEuNCB6IgogICAgICAgaWQ9InBhdGgxIiAvPgogIDwvc3ZnOmc+CiAgPGRpdgogICAgIGlkPSJzYWthLWd1aS1yb290Ij4KICAgIDxkaXY+CiAgICAgIDxkaXY+CiAgICAgICAgPHN0eWxlIC8+CiAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgPC9kaXY+Cjwvc3ZnOnN2Zz4K">
+        <!--?lit$453655903$--> <!--?lit$453655903$--><span class="version">
+        <!--?lit$453655903$--><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="code-branch" class="svg-inline--fa fa-code-branch icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M80 104a24 24 0 1 0 0-48 24 24 0 1 0 0 48zm80-24c0 32.8-19.7 61-48 73.3l0 87.8c18.8-10.9 40.7-17.1 64-17.1l96 0c35.3 0 64-28.7 64-64l0-6.7C307.7 141 288 112.8 288 80c0-44.2 35.8-80 80-80s80 35.8 80 80c0 32.8-19.7 61-48 73.3l0 6.7c0 70.7-57.3 128-128 128l-96 0c-35.3 0-64 28.7-64 64l0 6.7c28.3 12.3 48 40.5 48 73.3c0 44.2-35.8 80-80 80s-80-35.8-80-80c0-32.8 19.7-61 48-73.3l0-6.7 0-198.7C19.7 141 0 112.8 0 80C0 35.8 35.8 0 80 0s80 35.8 80 80zm232 0a24 24 0 1 0 -48 0 24 24 0 1 0 48 0zM80 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"></path></svg> <!--?lit$453655903$-->stable
+      </span> 
+        <span class="caret"><!--?lit$453655903$--><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-down" class="svg-inline--fa fa-caret-down icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"></path></svg></span>
+      </header>
+    
+        <main class=" closed ">
+          <!--?lit$453655903$--> <!--?lit$453655903$-->
+      <dl class="versions">
+        <dt>Versions</dt>
+        <!--?lit$453655903$--><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/latest/dev/pdf-format.html"><!--?lit$453655903$-->latest</a></dd><!----><!----><dd><!--?lit$453655903$--><strong><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/stable/dev/pdf-format.html"><!--?lit$453655903$-->stable</a></strong></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/5.2.0/dev/pdf-format.html"><!--?lit$453655903$-->5.2.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/5.1.0/dev/pdf-format.html"><!--?lit$453655903$-->5.1.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/5.0.1/dev/pdf-format.html"><!--?lit$453655903$-->5.0.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/5.0.0/dev/pdf-format.html"><!--?lit$453655903$-->5.0.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/4.3.1/dev/pdf-format.html"><!--?lit$453655903$-->4.3.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/4.3.0/dev/pdf-format.html"><!--?lit$453655903$-->4.3.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/4.2.0/dev/pdf-format.html"><!--?lit$453655903$-->4.2.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/4.1.0/dev/pdf-format.html"><!--?lit$453655903$-->4.1.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/4.0.2/dev/pdf-format.html"><!--?lit$453655903$-->4.0.2</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/4.0.1/dev/pdf-format.html"><!--?lit$453655903$-->4.0.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/4.0.0/dev/pdf-format.html"><!--?lit$453655903$-->4.0.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.17.4/dev/pdf-format.html"><!--?lit$453655903$-->3.17.4</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.17.3/dev/pdf-format.html"><!--?lit$453655903$-->3.17.3</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.17.2/dev/pdf-format.html"><!--?lit$453655903$-->3.17.2</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.17.1/dev/pdf-format.html"><!--?lit$453655903$-->3.17.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.17.0/dev/pdf-format.html"><!--?lit$453655903$-->3.17.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.16.4/dev/pdf-format.html"><!--?lit$453655903$-->3.16.4</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.16.3/dev/pdf-format.html"><!--?lit$453655903$-->3.16.3</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.16.2/dev/pdf-format.html"><!--?lit$453655903$-->3.16.2</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.16.1/dev/pdf-format.html"><!--?lit$453655903$-->3.16.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.16.0/dev/pdf-format.html"><!--?lit$453655903$-->3.16.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.15.5/dev/pdf-format.html"><!--?lit$453655903$-->3.15.5</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.15.4/dev/pdf-format.html"><!--?lit$453655903$-->3.15.4</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.15.3/dev/pdf-format.html"><!--?lit$453655903$-->3.15.3</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.15.2/dev/pdf-format.html"><!--?lit$453655903$-->3.15.2</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.15.1/dev/pdf-format.html"><!--?lit$453655903$-->3.15.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.15.0/dev/pdf-format.html"><!--?lit$453655903$-->3.15.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.14.0/dev/pdf-format.html"><!--?lit$453655903$-->3.14.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.13.0/dev/pdf-format.html"><!--?lit$453655903$-->3.13.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.12.2/dev/pdf-format.html"><!--?lit$453655903$-->3.12.2</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.12.1/dev/pdf-format.html"><!--?lit$453655903$-->3.12.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.12.0/dev/pdf-format.html"><!--?lit$453655903$-->3.12.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.11.1/dev/pdf-format.html"><!--?lit$453655903$-->3.11.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.11.0/dev/pdf-format.html"><!--?lit$453655903$-->3.11.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.10.0/dev/pdf-format.html"><!--?lit$453655903$-->3.10.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.9.1/dev/pdf-format.html"><!--?lit$453655903$-->3.9.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.9.0/dev/pdf-format.html"><!--?lit$453655903$-->3.9.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.8.1/dev/pdf-format.html"><!--?lit$453655903$-->3.8.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.8.0/dev/pdf-format.html"><!--?lit$453655903$-->3.8.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.7.1/dev/pdf-format.html"><!--?lit$453655903$-->3.7.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.7.0/dev/pdf-format.html"><!--?lit$453655903$-->3.7.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.6.0/dev/pdf-format.html"><!--?lit$453655903$-->3.6.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.5.2/dev/pdf-format.html"><!--?lit$453655903$-->3.5.2</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.5.1/dev/pdf-format.html"><!--?lit$453655903$-->3.5.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.5.0/dev/pdf-format.html"><!--?lit$453655903$-->3.5.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.4.1/dev/pdf-format.html"><!--?lit$453655903$-->3.4.1</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.4.0/dev/pdf-format.html"><!--?lit$453655903$-->3.4.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.3.0/dev/pdf-format.html"><!--?lit$453655903$-->3.3.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.2.0/dev/pdf-format.html"><!--?lit$453655903$-->3.2.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.1.0/dev/pdf-format.html"><!--?lit$453655903$-->3.1.0</a></dd><!----><!----><dd><!--?lit$453655903$--><a href="https://pypdf.readthedocs.io/en/3.0.0/dev/pdf-format.html"><!--?lit$453655903$-->3.0.0</a></dd><!---->
+      </dl>
+    
+          <!--?lit$453655903$-->
+      <dl class="downloads">
+        <dt>Downloads</dt>
+        <!--?lit$453655903$--><!----><dd>
+              <a href="https://pypdf.readthedocs.io/_/downloads/en/stable/epub/"><!--?lit$453655903$-->EPUB</a>
+            </dd><!----><!----><dd>
+              <a href="https://pypdf.readthedocs.io/_/downloads/en/stable/htmlzip/"><!--?lit$453655903$-->HTML</a>
+            </dd><!----><!----><dd>
+              <a href="https://pypdf.readthedocs.io/_/downloads/en/stable/pdf/"><!--?lit$453655903$-->PDF</a>
+            </dd><!---->
+      </dl>
+     <!--?lit$453655903$-->
+      <dl>
+        <dt>On Read the Docs</dt>
+        <dd>
+          <a href="https://app.readthedocs.org/projects/pypdf/?utm_source=pypdf&amp;utm_content=flyout">Project Home</a>
+        </dd>
+        <dd>
+          <a href="https://app.readthedocs.org/projects/pypdf/builds/?utm_source=pypdf&amp;utm_content=flyout">Builds</a>
+        </dd>
+      </dl>
+    
+          <!--?lit$453655903$--> <!--?lit$453655903$-->
+        <dl>
+          <dt>Search</dt>
+          <dd>
+            <form id="flyout-search-form">
+              <input type="text" name="q" aria-label="Search docs" placeholder="Search docs">
+            </form>
+          </dd>
+        </dl>
+      
+          <hr>
+          <!--?lit$453655903$-->
+      <small>
+        <span>
+          <a href="https://docs.readthedocs.io/page/addons.html?utm_source=pypdf&amp;utm_content=flyout">Addons documentation</a></span>
+        <span> ― </span>
+        <span>Hosted by
+          <a href="https://about.readthedocs.com/?utm_source=pypdf&amp;utm_content=flyout">Read the Docs</a></span>
+      </small>
+    
+        </main>
+      </div>
+    </template></readthedocs-flyout><div id="readthedocs-ea" class="raised loaded" data-ea-type="image" data-ea-style="stickybox" data-ea-placement-bottom="90px" data-ea-manual="true" data-ea-publisher="readthedocs" data-ea-keywords="python|readthedocs-project-830778|readthedocs-project-pypdf" data-ea-campaign-types="community|house|paid" style="bottom: 90px;"><div class="ea-placement ea-type-image"><div class="ea-content"><a href="https://server.ethicalads.io/proxy/click/8174/0194ac60-2cd2-7401-98a9-a1d0a35e3cfe/" rel="nofollow noopener sponsored" target="_blank"><img src="./The PDF Format — pypdf 5.2.0 documentation_files/ethicalads-ad-dash.png" alt="Sponsored: EthicalAds"></a><div class="ea-text"><a href="https://server.ethicalads.io/proxy/click/8174/0194ac60-2cd2-7401-98a9-a1d0a35e3cfe/" rel="nofollow noopener sponsored" target="_blank"><strong class="ea-headline">AI-powered ad network for devs. </strong><span class="ea-body">Get your message in front of the right developers with EthicalAds.</span></a></div><div class="ea-domain">www.ethicalads.io</div></div><div class="ea-callout"><a rel="nofollow noopener" target="_blank" href="https://www.ethicalads.io/advertisers/?ref=ea-image">Ads by EthicalAds</a></div><div class="ea-stickybox-hide">×</div></div><img src="./The PDF Format — pypdf 5.2.0 documentation_files/saved_resource(1)" class="ea-pixel"></div><readthedocs-notification class="raised toast"><template shadowrootmode="open"><!----></template></readthedocs-notification><readthedocs-search class="raised floating"><template shadowrootmode="open"><!---->
+      <div role="search" hidden="">
+        <div class="background"></div>
+        <div class="content">
+          <form class="  ">
+            <label><!--?lit$453655903$--><svg aria-labelledby="svg-inline--fa-title-ZzqxU4CFmXQQ" data-prefix="fas" data-icon="magnifying-glass" class="svg-inline--fa fa-magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title id="svg-inline--fa-title-ZzqxU4CFmXQQ">Search docs</title><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg></label>
+            <input placeholder="Search docs" type="search" autocomplete="off">
+          </form>
+          <!--?lit$453655903$-->
+          <div class="results">
+            <!--?lit$453655903$--><p>No recent searches</p>
+          </div>
+          <div class="footer">
+            <ul class="help">
+              <li><code>Enter</code> to select</li>
+              <li><code>Up</code>/<code>Down</code> to navigate</li>
+              <li><code>Esc</code> to close</li>
+            </ul>
+            <div class="credits">
+              Search powered by
+              <a href="https://about.readthedocs.com/?utm_source=pypdf&amp;utm_content=search">
+                <img alt="Read the Docs" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJzdmciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSI2OTQgMTk3IDIwMDAgNDAwIj4KPGcgaWQ9ImxvZ28iIHRyYW5zZm9ybT0ibWF0cml4KDAuNTU3NTM2NDQsMCwwLDAuNTU3NTM2NDQsNjguMzA4MTM1LDEwNTAuMTI2MikiPgoJPHBhdGggc3R5bGU9ImZpbGw6IzMyMzIyQSIgZD0iTTE0MDguMS0xMTgxLjdjLTcuNSwxLTEyLjcsNy44LTExLjcsMTUuMyAgIGMwLjcsNS40LDQuNiw5LjksOS45LDExLjNjMCwwLDMzLjIsMTEsODkuNywxNS42YzQ1LjQsMy43LDk2LjktMy4yLDk2LjktMy4yYzcuNS0wLjIsMTMuNS02LjUsMTMuMi0xNHMtNi41LTEzLjUtMTQtMTMuMiAgIGMtMC45LDAtMS44LDAuMS0yLjYsMC4zYzAsMC01MC40LDYuMi05MS4zLDIuOWMtNTQtNC40LTgzLjQtMTQuMy04My40LTE0LjNDMTQxMi42LTExODEuNywxNDEwLjMtMTE4MiwxNDA4LjEtMTE4MS43eiAgICBNMTQwOC4xLTEyNDkuM2MtNy41LDEtMTIuNyw3LjgtMTEuNywxNS4zYzAuNyw1LjQsNC42LDkuOSw5LjksMTEuM2MwLDAsMzMuMiwxMSw4OS43LDE1LjZjNDUuNCwzLjcsOTYuOS0zLjIsOTYuOS0zLjIgICBjNy41LTAuMiwxMy41LTYuNSwxMy4yLTE0cy02LjUtMTMuNS0xNC0xMy4yYy0wLjksMC0xLjgsMC4xLTIuNiwwLjNjMCwwLTUwLjQsNi4yLTkxLjMsMi45Yy01NC00LjQtODMuNC0xNC4zLTgzLjQtMTQuMyAgIEMxNDEyLjYtMTI0OS4zLDE0MTAuMy0xMjQ5LjYsMTQwOC4xLTEyNDkuM3ogTTE0MDguMS0xMzE2LjljLTcuNSwxLTEyLjcsNy44LTExLjcsMTUuM2MwLjcsNS40LDQuNiw5LjksOS45LDExLjMgICBjMCwwLDMzLjIsMTEsODkuNywxNS42YzQ1LjQsMy43LDk2LjktMy4yLDk2LjktMy4yYzcuNS0wLjIsMTMuNS02LjUsMTMuMi0xNHMtNi41LTEzLjUtMTQtMTMuMmMtMC45LDAtMS44LDAuMS0yLjYsMC4zICAgYzAsMC01MC40LDYuMi05MS4zLDIuOWMtNTQtNC40LTgzLjQtMTQuMy04My40LTE0LjNDMTQxMi42LTEzMTYuOSwxNDEwLjMtMTMxNy4yLDE0MDguMS0xMzE2Ljl6IE0xNDA4LjEtMTM4NC40ICAgYy03LjUsMS0xMi43LDcuOC0xMS43LDE1LjNjMC43LDUuNCw0LjYsOS45LDkuOSwxMS4zYzAsMCwzMy4yLDExLDg5LjcsMTUuNmM0NS40LDMuNyw5Ni45LTMuMiw5Ni45LTMuMmM3LjUtMC4yLDEzLjUtNi41LDEzLjItMTQgICBzLTYuNS0xMy41LTE0LTEzLjJjLTAuOSwwLTEuOCwwLjEtMi42LDAuM2MwLDAtNTAuNCw2LjItOTEuMywyLjljLTU0LTQuNC04My40LTE0LjMtODMuNC0xNC4zICAgQzE0MTIuNi0xMzg0LjUsMTQxMC4zLTEzODQuNywxNDA4LjEtMTM4NC40eiBNMTMxMy40LTE0NTUuN2MtNzEsMC41LTk3LjUsMjIuMy05Ny41LDIyLjN2NTMwLjNjMCwwLDI1LjgtMjIuMywxMDktMTguOSAgIGM4My4yLDMuNCwxMDAuMywzMi42LDIwMi41LDM0LjZjMTAyLjIsMi4xLDEyNy45LTE1LjcsMTI3LjktMTUuN2wxLjUtNTQwLjZjMCwwLTQ2LDEzLTEzNS41LDEzLjdzLTExMS0yMi44LTE5My4yLTI1LjUgICBDMTMyMy0xNDU1LjYsMTMxOC4xLTE0NTUuNywxMzEzLjQtMTQ1NS43eiBNMTM3Mi44LTE0MjEuMWMwLDAsNDMsMTQuMiwxMjIuNSwxOC4yYzY3LjIsMy4zLDEzNC41LTYuNiwxMzQuNS02LjZ2NDgwLjUgICBjMCwwLTM0LjEsMTcuOS0xMTkuMywxMS44Yy02Ni00LjctMTM4LjctMjkuNy0xMzguNy0yOS43TDEzNzIuOC0xNDIxLjF6IE0xMzMxLjMtMTQwOC42YzcuNiwwLDEzLjcsNi4yLDEzLjcsMTMuNyAgIHMtNi4yLDEzLjctMTMuNywxMy43YzAsMC0yMi4zLDAuMS0zNS44LDEuNWMtMjIuOCwyLjMtMzguMywxMC42LTM4LjMsMTAuNmMtNi43LDMuNS0xNSwxLTE4LjUtNS43cy0xLTE1LDUuNy0xOC41YzAsMCwwLDAsMCwwICAgYzAsMCwyMC4yLTEwLjcsNDguNC0xMy41QzEzMDkuMS0xNDA4LjUsMTMzMS4zLTE0MDguNiwxMzMxLjMtMTQwOC42eiBNMTMxOC4xLTEzNDAuOGM3LjYtMC4yLDEzLjMsMCwxMy4zLDAgICBjNy41LDAuOSwxMi45LDcuOCwxMiwxNS4zYy0wLjgsNi4zLTUuNywxMS4yLTEyLDEyYzAsMC0yMi4zLDAuMS0zNS44LDEuNWMtMjIuOCwyLjMtMzguMywxMC42LTM4LjMsMTAuNmMtNi43LDMuNS0xNSwwLjktMTguNS01LjggICBjLTMuNS02LjctMC45LTE1LDUuOC0xOC41YzAsMCwyMC4yLTEwLjcsNDguNC0xMy41QzEzMDAuOS0xMzQwLjEsMTMxMC41LTEzNDAuNiwxMzE4LjEtMTM0MC44eiBNMTMzMS4zLTEyNzMuMyAgIGM3LjYsMCwxMy43LDYuMiwxMy43LDEzLjdjMCw3LjYtNi4yLDEzLjctMTMuNywxMy43YzAsMC0yMi4zLTAuMS0zNS44LDEuMmMtMjIuOCwyLjMtMzguMywxMC42LTM4LjMsMTAuNiAgIGMtNi43LDMuNS0xNSwwLjktMTguNS01LjhjLTMuNS02LjctMC45LTE1LDUuOC0xOC41YzAsMCwyMC4yLTEwLjcsNDguNC0xMy41QzEzMDkuMS0xMjczLjQsMTMzMS4zLTEyNzMuMywxMzMxLjMtMTI3My4zeiIvPgo8L2c+CjxnIGlkPSJ0ZXh0Ij4KCTxwYXRoIHN0eWxlPSJmaWxsOiMzMjMyMkEiIGQ9Ik0xMTI4LjYsNDkxLjlWNDcwbDguOS0wLjhjNS4yLTAuNSw3LjgtMy4xLDcuOC03LjZWMzM2bC0xNS40LTAuOHYtMjNoNzMuOCAgIGMyMC45LDAsMzYuOSwzLjksNDguMSwxMS42YzExLjIsNy43LDE2LjgsMjAuNSwxNi44LDM4LjFjMCwxMi4zLTMuMiwyMi4zLTkuNywzMC4zYy02LjMsNy45LTEzLjksMTMuNy0yMi43LDE3LjMgICBjNi41LDIuMywxMS42LDcuOCwxNS40LDE2LjVsMTkuNSw0Mi40bDE1LjQsMC41djIzaC02Ni44VjQ3MGw3LjgtMC44YzQuMS0wLjUsNi4yLTIuMiw2LjItNC45YzAtMS4xLTAuNC0yLjMtMS4xLTMuOGwtMTIuNy0yNyAgIGMtMi00LjUtNC4yLTcuNy02LjgtOS41Yy0yLjMtMi01LjgtMy0xMC4zLTNoLTI0LjZ2NDdsMTcuNiwwLjh2MjNMMTEyOC42LDQ5MS45IE0xMTc4LjMsMzk1LjRoMjMuNWMyMi4yLDAsMzMuMi05LjksMzMuMi0yOS43ICAgYzAtMTEuNC0zLTE4LjctOC45LTIyLjJjLTUuOC0zLjQtMTUuMS01LjEtMjguMS01LjFoLTE5LjdWMzk1LjQiLz4KCTxwYXRoIHN0eWxlPSJmaWxsOiMzMjMyMkEiIGQ9Ik0xMzU2LDM1MS45YzEzLjUsMCwyNC4yLDMuMywzMi4yLDEwYzcuOSw2LjUsMTEuOSwxNS43LDExLjksMjcuNmMwLDcuOS0xLjcsMTUtNS4xLDIxLjEgICBjLTMuNCw1LjktNy43LDEwLjYtMTIuNywxNC4xYy01LDMuNC0xMS4yLDYuMi0xOC40LDguNGMtMTIuMSwzLjYtMjUuNyw1LjQtNDAuOCw1LjRjMC41LDkuNSwzLjUsMTcuMyw4LjksMjMuMiAgIGM1LjQsNS44LDEzLjcsOC42LDI0LjksOC42YzExLjIsMCwyMi4zLTQsMzMuNS0xMS45bDEwLjMsMjEuOWMtMy42LDMuMi05LjcsNi42LTE4LjQsMTBjLTguNSwzLjQtMTguMiw1LjEtMjkuMiw1LjEgICBjLTIyLDAtMzguMS02LTQ4LjQtMTguMWMtMTAuMy0xMi4zLTE1LjQtMjktMTUuNC01MC4zYzAtMjEuMyw1LjktMzkuMSwxNy42LTUzLjVDMTMxOC41LDM1OS4xLDEzMzQuOSwzNTEuOSwxMzU2LDM1MS45ICAgIE0xMzQzLjYsNDEzLjhjNi43LTEuMywxMi44LTMuOSwxOC40LTcuOGM1LjYtNC4xLDguNC05LDguNC0xNC42YzAtMTEtNS40LTE2LjUtMTYuMi0xNi41Yy0xMC4xLDAtMTcuOCw0LjEtMjMuMiwxMi4yICAgYy01LjQsNy45LTguNCwxNy41LTguOSwyOC42QzEzMjkuOSw0MTUuNSwxMzM3LjEsNDE0LjksMTM0My42LDQxMy44Ii8+Cgk8cGF0aCBzdHlsZT0iZmlsbDojMzIzMjJBIiBkPSJNMTUyOS42LDM2MS40djEwMC41YzAsMi45LDAuNSw0LjksMS40LDUuOWMxLjEsMS4xLDIuOSwxLjcsNS40LDEuOWw4LjYsMC41djIxLjZoLTQzdi0xNS43ICAgbC0wLjgtMC4zYy05LDEzLTIxLjQsMTkuNS0zNywxOS41Yy0xOC40LDAtMzItNS45LTQwLjgtMTcuNmMtOC44LTExLjctMTMuMi0yNy43LTEzLjItNDguMWMwLTI0LjUsNS45LTQzLjYsMTcuOC01Ny4zICAgYzExLjktMTMuNywyOS43LTIwLjUsNTMuNS0yMC41QzE0OTYuOCwzNTEuOSwxNTEyLjksMzU1LjEsMTUyOS42LDM2MS40IE0xNDk4LjMsNDQ4Ljl2LTcwYy01LTIuMy0xMi0zLjUtMjAuOC0zLjUgICBjLTEyLjEsMC0yMC44LDQuOS0yNi4yLDE0LjZjLTUuNCw5LjctOC4xLDIyLjYtOC4xLDM4LjdjMCwyOS4yLDkuNCw0My44LDI4LjEsNDMuOGM3LjksMCwxNC40LTIuMywxOS41LTcgICBDMTQ5NS43LDQ2MC42LDE0OTguMyw0NTUuMSwxNDk4LjMsNDQ4LjkiLz4KCTxwYXRoIHN0eWxlPSJmaWxsOiMzMjMyMkEiIGQ9Ik0xNjE2LjMsMzUxLjljNy43LDAsMTUuMSwxLjEsMjIuMiwzLjJ2LTI3LjNjMC00LTIuMy02LjEtNy02LjVsLTExLjYtMC44di0yMS40aDUwLjN2MTY0LjMgICBjMC4yLDQuMSwyLjQsNi4yLDYuOCw2LjJsOS41LDAuNXYyMS42aC00My44VjQ3NmwtMC44LTAuM2MtOC4xLDEzLjItMjAuNCwxOS43LTM2LjgsMTkuN2MtMjAuNSwwLTM1LTYuOC00My4yLTIwLjUgICBjLTcuNi0xMi40LTExLjQtMjcuNy0xMS40LTQ1LjdjMC0yMy40LDUuOC00Mi4yLDE3LjMtNTYuMkMxNTc5LjMsMzU4LjksMTU5NS41LDM1MS45LDE2MTYuMywzNTEuOSBNMTYzOC40LDQ0OS44di03MCAgIGMtNi41LTIuOS0xMy4zLTQuMy0yMC41LTQuM2MtMTEuOSwwLTIwLjYsNC44LTI2LjIsMTQuM2MtNS40LDkuNi04LjEsMjEuNy04LjEsMzYuNWMwLDMwLjMsOS43LDQ1LjQsMjkuMiw0NS40ICAgYzcuNCwwLDEzLjUtMi4xLDE4LjQtNi4yQzE2MzYsNDYxLjEsMTYzOC40LDQ1NS45LDE2MzguNCw0NDkuOCIvPgoJPHBhdGggc3R5bGU9ImZpbGw6IzMyMzIyQSIgZD0iTTE3OTEuNyw0NzAuNmMwLDAtMTIuNSw0LjctMTkuMiw0LjdzLTkuMi0zLjMtOS4yLTExLjhjMC0zLjgsMC41LTguOCwxLjQtMTQuOWwxMC4yLTYzLjFoMzIuNiAgIGwyLjgtMTcuN2gtMzIuNmw1LjctMzQuNUwxNzYwLDMzOGwtNC43LDI5LjhsLTIzLjYsMi40bC0yLjYsMTUuNGgyMy40TDE3NDIsNDUxYy0wLjksNS40LTEuNCwxMC42LTEuNCwxNS4xICAgYzAsMTguNyw3LjgsMjguMSwyMy45LDI4LjFjMTMuMiwwLDMxLTEwLjksMzEtMTAuOUwxNzkxLjcsNDcwLjYiLz4KCTxwYXRoIHN0eWxlPSJmaWxsOiMzMjMyMkEiIGQ9Ik0xODY1LDMwOS44bC00My4zLDEuMmwtMi4xLDEzbDE5LjksNC43bC0yNiwxNjMuMmgyMi41bDcuOC00Mi42YzAsMCwxOC43LTY1LDQ5LjQtNjUgICBjOS41LDAsMTIuMyw2LjksMTIuMywxNS42YzAsMy4zLTAuNSw2LjktMC45LDEwLjRsLTEzLjUsODEuNmw0My4zLTIuNGwyLjEtMTNsLTE5LjktMy41bDEwLjYtNjYuMmMwLjctNSwxLjItOS43LDEuMi0xNCAgIGMwLTE3LTYuOS0yOC42LTI1LjgtMjguNmMtMzUuOSwwLTU0LjksNDUuNi01NS44LDQ4LjJMMTg2NSwzMDkuOCIvPgoJPHBhdGggc3R5bGU9ImZpbGw6IzMyMzIyQSIgZD0iTTIwMzUsNDY0LjdjMCwwLTIxLjUsMTAuNi0zOC44LDEwLjZjLTE3LjcsMC0yNi03LjgtMjYtMjQuNmMwLTMuMSwwLjItNi42LDAuNy0xMC4yICAgYzQ5LDAsODMtMTguNCw4My00NS42YzAtMTguNy0xNS4xLTMwLjctMzktMzAuN2MtMzcuNiwwLTY4LjMsMzguNS02OC4zLDg3LjVjMCwyNiwxNi42LDQyLjYsNDIuNiw0Mi42YzI3LjksMCw1My0xNy41LDUzLTE3LjUgICBMMjAzNSw0NjQuNyBNMTk3Myw0MjRjNi4xLTI0LjgsMjMuNC00Mi4xLDQwLjctNDIuMWMxMi4xLDAsMTcuNyw1LDE3LjcsMTUuNEMyMDMxLjUsNDEyLjksMjAwNi42LDQyNCwxOTczLDQyNCIvPgoJPHBhdGggc3R5bGU9ImZpbGw6IzMyMzIyQSIgZD0iTTIwOTMuNyw0OTEuOVY0NzBsOC45LTAuOGM1LjItMC41LDcuOC0zLjEsNy44LTcuNlYzMzZsLTE1LjQtMC44di0yM2g3NC4xICAgYzI2LjUsMCw0Ny4xLDcsNjEuOSwyMS4xYzE1LDE0LjEsMjIuNCwzNC45LDIyLjQsNjIuNGMwLDE3LjEtMi4zLDMyLjEtNi44LDQ0LjljLTQuNSwxMi42LTEwLjYsMjIuNS0xOC40LDI5LjcgICBjLTE1LjUsMTQuNC0zNC44LDIxLjYtNTcuOCwyMS42TDIwOTMuNyw0OTEuOSBNMjE0My40LDMzOC40VjQ2NmgyNy42YzE1LjUsMCwyNy42LTUuNiwzNi4yLTE2LjhjOC42LTExLjIsMTMtMjcuNCwxMy00OC43ICAgYzAtNDEuNC0xNy42LTYyLjItNTIuNy02Mi4ySDIxNDMuNCIvPgoJPHBhdGggc3R5bGU9ImZpbGw6IzMyMzIyQSIgZD0iTTIzMzAsNDcyLjJjMTkuNiwwLDI5LjUtMTUuOSwyOS41LTQ3LjZjMC0xNi0yLjMtMjguMi02LjgtMzYuNWMtNC4zLTguMy0xMS43LTEyLjQtMjIuMi0xMi40ICAgYy0xMC4zLDAtMTcuOCw0LTIyLjcsMTEuOWMtNC45LDcuOS03LjMsMTguNy03LjMsMzIuNGMwLDI1LjQsNC43LDQxLjQsMTQuMSw0Ny44QzIzMTguOCw0NzAuNywyMzIzLjksNDcyLjIsMjMzMCw0NzIuMiAgICBNMjI2Ny45LDQyMy44YzAtMTMuMywyLTI0LjksNS45LTM0LjZjNC05LjksOS4zLTE3LjUsMTUuOS0yMi43YzEyLjgtOS43LDI2LjktMTQuNiw0Mi40LTE0LjZjMTAuOCwwLDE5LjksMS44LDI3LjMsNS40ICAgYzcuNiwzLjQsMTMuNCw3LjUsMTcuNiwxMi4yYzQuMyw0LjUsNy45LDExLjIsMTAuOCwyMGMzLjEsOC42LDQuNiwxOC45LDQuNiwzMC44YzAsMjQuOS02LDQzLjctMTguMSw1Ni41ICAgYy0xMi4xLDEyLjgtMjcuNiwxOS4yLTQ2LjUsMTkuMmMtMTguNywwLTMzLjQtNi00NC4xLTE4LjFDMjI3My4yLDQ2NS42LDIyNjcuOSw0NDcuNiwyMjY3LjksNDIzLjgiLz4KCTxwYXRoIHN0eWxlPSJmaWxsOiMzMjMyMkEiIGQ9Ik0yNDM4LjIsNDIyLjVjMCwxNS4zLDIuOSwyNy4yLDguNiwzNS43YzUuOCw4LjUsMTQuMSwxMi43LDI0LjksMTIuN2MxMSwwLDIxLjgtMy45LDMyLjQtMTEuNiAgIGwxMS42LDIwLjhjLTEyLjgsMTAuNS0yOC44LDE1LjctNDguMSwxNS43Yy0xOS4zLDAtMzQuNS02LTQ1LjctMTguMWMtMTEtMTIuMy0xNi41LTMwLjMtMTYuNS01NC4xczYuMy00MS42LDE4LjktNTMuNSAgIGMxMi44LTEyLjEsMjcuMS0xOC4xLDQzLTE4LjFjMTYsMCwzMC45LDMuNyw0NC42LDExLjF2MzUuMWwtMjQuOSwxLjl2LTEzYzAtNC45LTEuOC03LjgtNS40LTguOWMtMy40LTEuMy03LTEuOS0xMC44LTEuOSAgIEMyNDQ5LjEsMzc2LjIsMjQzOC4yLDM5MS42LDI0MzguMiw0MjIuNSIvPgoJPHBhdGggc3R5bGU9ImZpbGw6IzMyMzIyQSIgZD0iTTI1OTIuOSwzNzYuNWMtNC4zLTEuNi05LjYtMi40LTE1LjctMi40Yy02LjEsMC0xMS4xLDEuNC0xNC45LDQuM2MtMy42LDIuNy01LjQsNi4xLTUuNCwxMC4zICAgYzAsNCwwLjYsNy4xLDEuOSw5LjVjMS40LDIuMiwzLjYsNC4xLDYuNSw1LjdjNC41LDIuMyw5LjksNC40LDE2LjIsNi4yYzYuMywxLjYsMTEsMywxNC4xLDQuMWMzLjEsMC45LDYuOCwyLjUsMTEuNCw0LjkgICBjNC43LDIuMyw4LjIsNC45LDEwLjUsNy42YzYuMyw2LjcsOS41LDE1LjIsOS41LDI1LjdjMCwxMy41LTUsMjQuMS0xNC45LDMxLjljLTkuNyw3LjYtMjIuMiwxMS40LTM3LjMsMTEuNCAgIGMtMjIsMC0zOC42LTIuOC00OS43LTguNHYtMzcuNmwyNC4zLTEuOXYxM2MwLDcuOSw3LjYsMTEuOSwyMi43LDExLjlzMjIuNy01LjUsMjIuNy0xNi41YzAtNC0xLjQtNy4yLTQuMS05LjcgICBjLTIuNS0yLjUtNS00LjItNy42LTUuMWMtMi41LTAuOS01LjYtMS44LTkuMi0yLjdjLTMuNC0wLjktNi44LTEuOC0xMC4zLTIuN2MtMy4yLTAuOS02LjgtMi4xLTEwLjgtMy41Yy0zLjgtMS42LTgtMy45LTEyLjctNi44ICAgYy05LjItNS45LTEzLjgtMTUuOS0xMy44LTI5LjdjMC0xNC4xLDUtMjQuOSwxNC45LTMyLjRjOS45LTcuNiwyMi4zLTExLjQsMzcuMy0xMS40YzE1LjEsMCwzMC4xLDMuNiw0NC45LDEwLjh2MzIuNGwtMjQuMywxLjkgICB2LTExLjRDMjU5OS4xLDM4MS4yLDI1OTcsMzc4LjEsMjU5Mi45LDM3Ni41Ii8+CjwvZz4KPGRpdiB4bWxucz0iIiBpZD0ic2FrYS1ndWktcm9vdCI+PGRpdj48ZGl2PjxzdHlsZS8+PC9kaXY+PC9kaXY+PC9kaXY+PC9zdmc+">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template></readthedocs-search><readthedocs-hotkeys><template shadowrootmode="open"><!----></template></readthedocs-hotkeys></body></html>
