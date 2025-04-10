@@ -1,5 +1,5 @@
 from PyPDF2 import PdfReader, PdfWriter
-
+import csv
 def split_pdf(input_pdf_path):
     reader = PdfReader(input_pdf_path)
     
